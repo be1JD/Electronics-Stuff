@@ -1,0 +1,25 @@
+--> Resistors selections :
+
+@ NOTE :-  THE READING WILL BE TAKEN FROM SMALLER RESISTOR NOT THE BIGGER ONE
+
+    1. Voltage monitoring Module - For Esp32 max volt to board should be 3.3 volt and for arduino it is 5 volt
+
+        -- So for 3.3 volt,
+                 
+            a. For batter V1 :- ( max batt. volt / max. reading volt) = (4.5 / 3.3) = 1.36363636 resistor ratio
+                 - R1 = 110k then, 110k * 1.36363636 = 149.999 ~ 150k = R2
+                 - 1.36363636 resistor ration is required 
+                 
+             b. For batter V2 :- ( max batt. volt / max. reading volt) = (4.5 / 3.3) =  2.727272 resistor ratio
+                 - 2.727272 resistor ration is required 
+                 - R3 = 110k then, 110k * 2.727272 = 299.999 ~ 300k = R4
+                 
+             c. For batter V2 :- ( max batt. volt / max. reading volt) = (4.5 / 3.3) = 4.09090 resistor ratio
+                 - 4.09090 resistor ration is required 
+                 - R5 = 114.7k then, 114.7k * 4.09090 = 469.227 ~ 470k = R6
+
+--> Transistors selections :
+  @ NOTE :- The transistors make sense but it should not connected directely with microcontroller , THE DRIVER CIRCUIT IS REQUIRED(microcontroller cannot handel large currents)
+
+     1. Battery Drain Transistor(Balancing transistors) - you can use BJT transistor because the job is to convert energy to heat anyway
+      

@@ -1,0 +1,2 @@
+Problem 1 :- If i turn off ouput for reading the voltage values then the output power will be decreased for some time [So what is needed to do is to decrease reading time and also decrease need of volt]
+Solution 1 :- Do not turn off the output charing should have different circuit maybe charger circuit is more suitable

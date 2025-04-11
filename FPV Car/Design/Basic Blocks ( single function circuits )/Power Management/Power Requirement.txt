@@ -1,0 +1,5 @@
+(RC only - NO camera module) at 5 volts
+- Standby Mode Consumption -   50 - 70 miliapms
+- Max Power Consumption - 2.12 - 2.20 amps 
+
+NOTE :- Need Constant voltage for microcontroller

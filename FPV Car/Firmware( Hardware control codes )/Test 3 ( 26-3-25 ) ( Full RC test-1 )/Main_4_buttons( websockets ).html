@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPV Car WebSocket Control</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        button { font-size: 20px; padding: 15px; margin: 10px; background-color: blue; color: white; border: none; border-radius: 10px; }
+        .container { display: flex; flex-direction: column; align-items: center; }
+        .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>FPV Car WebSocket Controller</h1>
+
+    <p id="status">Status: Not Connected</p>
+
+    <div class="container">
+        <div class="controls">
+            <button ontouchstart="sendCommand('forward_start')" ontouchend="sendCommand('forward_stop')">⬆️</button>
+            <button ontouchstart="sendCommand('left_start')" ontouchend="sendCommand('left_stop')">⬅️</button>
+            <button ontouchstart="sendCommand('right_start')" ontouchend="sendCommand('right_stop')">➡️</button>
+            <button ontouchstart="sendCommand('back_start')" ontouchend="sendCommand('back_stop')">⬇️</button>
+        </div>
+    </div>
+
+    <script>
+        let ws;
+        let esp32_ip = "ws://192.168.9.146:81"; // Replace with ESP32's IP
+
+        function connectWebSocket() {
+            ws = new WebSocket(esp32_ip);
+            ws.onopen = () => { document.getElementById("status").innerText = "Status: Connected!"; };
+            ws.onmessage = (event) => { console.log("Message from ESP32:", event.data); };
+            ws.onclose = () => {
+                document.getElementById("status").innerText = "Status: Disconnected!";
+                setTimeout(connectWebSocket, 2000);
+            };
+        }
+
+        function sendCommand(command) {
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(command);
+                console.log("Sent:", command);
+            }
+        }
+
+        connectWebSocket();
+    </script>
+
+</body>
+</html>

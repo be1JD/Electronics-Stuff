@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPV Car Joystick Control</title>
+    <script src="https://cdn.jsdelivr.net/npm/nipplejs@0.9.0"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .joystick-container { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; }
+        #status { font-size: 18px; margin-top: 10px; }
+        .video-container { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>FPV Car Joystick Controller</h1>
+    <p id="status">Status: Not Connected</p>
+
+    <!-- FPV Camera Feed -->
+    <div class="video-container">
+        <img id="video" src="http://192.168.1.100:81/stream" width="100%">
+    </div>
+
+    <!-- Joystick Control -->
+    <div class="joystick-container" id="joystick"></div>
+
+    <script>
+        let ws;
+        let esp32_ip = "ws://192.168.9.146:81"; // Replace with your ESP32 IP
+
+        function connectWebSocket() {
+            ws = new WebSocket(esp32_ip);
+            ws.onopen = () => { document.getElementById("status").innerText = "Status: Connected!"; };
+            ws.onmessage = (event) => { console.log("Message from ESP32:", event.data); };
+            ws.onclose = () => {
+                document.getElementById("status").innerText = "Status: Disconnected!";
+                setTimeout(connectWebSocket, 2000);
+            };
+        }
+
+        function sendCommand(command) {
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(command);
+                console.log("Sent:", command);
+            }
+        }
+
+        // Initialize Joystick
+        let joystick = nipplejs.create({
+            zone: document.getElementById("joystick"),
+            mode: "dynamic",
+            position: { left: "50%", bottom: "50px" },
+            color: "blue"
+        });
+
+        let lastCommand = "";
+
+        joystick.on("move", (evt, data) => {
+            let angle = data.angle.degree;
+            let distance = data.distance;
+
+            let command = "";
+            if (distance > 20) {
+                if (angle > 45 && angle <= 135) command = "forward_start";
+                else if (angle > 225 && angle <= 315) command = "back_start";
+                else if (angle > 135 && angle <= 225) command = "left_start";
+                else command = "right_start";
+            } else {
+                command = "stop";
+            }
+
+            if (command !== lastCommand) {
+                sendCommand(command);
+                lastCommand = command;
+            }
+        });
+
+        joystick.on("end", () => {
+            sendCommand("stop");
+        });
+
+        connectWebSocket();
+    </script>
+
+</body>
+</html>

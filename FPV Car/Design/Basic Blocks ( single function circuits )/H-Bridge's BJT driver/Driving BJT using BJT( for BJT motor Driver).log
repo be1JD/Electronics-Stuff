@@ -1,0 +1,18 @@
+LTspice 24.0.9 for Windows
+Circuit: * C:\Users\Jay Patel\OneDrive\Desktop\projects ( E-Thunder)\FPV Car (Fun)\Design\Basic Blocks ( single function circuits )\H-Bridge's BJT driver\Driving BJT using BJT( for BJT motor Driver).asc
+Start Time: Sat Apr  5 18:47:45 2025
+Error on line 19 : r§power_control_resistor n007 n001 10 ohm
+	 Unknown parameter "ohm"
+solver = Normal
+Maximum thread count: 12
+tnom = 27
+temp = 27
+method = modified trap
+Limiting rise time of source v2 to 0.1
+Limiting fall time of source v2 to 0.1
+WARNING: Specified period is not longer than the sum of Trise, Tfall, and Ton for v3.  Increasing period to 1
+Limiting rise time of source v3 to 1.9984e-16
+Limiting fall time of source v3 to 1.9984e-16
+Direct Newton iteration for .op point succeeded.
+Total elapsed time: 0.136 seconds.
+

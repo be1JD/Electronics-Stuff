@@ -1,0 +1,44 @@
+LTspice 24.0.9 for Windows
+Circuit: * C:\Users\Jay Patel\OneDrive\Desktop\projects ( E-Thunder)\FPV Car (Fun)\Design\Modules\Module 3 ( Motor driver module )\Full Motor Driver Module ( version 1 ).asc
+Start Time: Sat Apr  5 18:54:00 2025
+Error on line 6 : v1 n003 0 5 volt
+	 Unknown parameter "volt"
+solver = Normal
+Maximum thread count: 12
+tnom = 27
+temp = 27
+method = modified trap
+WARNING: Specified period is not longer than the sum of Trise, Tfall, and Ton for v§q3_ctrl_signal.  Increasing period to 1
+Limiting rise time of source v§q3_ctrl_signal to 1.9984e-16
+Limiting fall time of source v§q3_ctrl_signal to 1.9984e-16
+WARNING: Specified period is not longer than the sum of Trise, Tfall, and Ton for v§q1_ctrl_signal.  Increasing period to 1
+Limiting rise time of source v§q1_ctrl_signal to 1.9984e-16
+Limiting fall time of source v§q1_ctrl_signal to 1.9984e-16
+WARNING: Specified period is not longer than the sum of Trise, Tfall, and Ton for v§q4_ctrl_signal.  Increasing period to 1
+Limiting rise time of source v§q4_ctrl_signal to 1.9984e-16
+Limiting fall time of source v§q4_ctrl_signal to 1.9984e-16
+WARNING: Specified period is not longer than the sum of Trise, Tfall, and Ton for v§q2_ctrl_signal.  Increasing period to 1
+Limiting rise time of source v§q2_ctrl_signal to 1.9984e-16
+Limiting fall time of source v§q2_ctrl_signal to 1.9984e-16
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+Gmin = 1.5325e-05
+Gmin = 1.6455e-06
+Gmin = 1.76685e-07
+Gmin = 1.89714e-08
+Gmin = 2.03704e-09
+Gmin = 2.18725e-10
+Gmin = 2.34854e-11
+Gmin = 2.52173e-12
+Gmin = 2.70769e-13
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 0.170 seconds.
+

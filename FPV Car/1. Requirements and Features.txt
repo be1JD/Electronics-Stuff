@@ -1,0 +1,46 @@
+--> Remote Controller Settings :- 
+     - User have to connect to ESP32 Wifi (Access Point)
+     - Then Enter ESP32 IP address in browser
+     - Then ESP32 start Websocket Server and Became Ready to control 
+
+--> Breaking System :-
+
+            1. Dynamic Breaking : Motor Terminals are shorted By turning on both NPN or PNP Transistor
+            2. Short circuit Breaking : Motor Terminals are shorted using Single mosfet and it
+            3. Regenarative breaking : Separate circuitary is used to get power from motor (motor acts as generator)[need External Circuitary which is not good]
+
+        Conclusion - I will use Dynamic Breaking
+
+--> Motor Speed & Direction Control ( need motor driver circuit ) :- 
+
+        PWM :- varying duty cycle(on time) of digital signal to control average voltage and power delivered to motor
+            - If you're using BD139 and BD140 then use 16 Khz pwm frequency because 10-20 khz is best for BJT ( more frequency cause more switching loses, slower rise and fall time )
+            - If your're using IRFZ44N MOSFET then you can also use frequency more than 20 khz ( Little bit expensive than BJT ) 
+        NOTE :- USE IRFZ44N N-Channel MOSFET it is better but overkill for 1.5 amps at 5 volts
+            1. ALL N-channel mosfets
+            2. PMOS + NMOS circuitary
+        NOTE :- Using all N-channel Mosfet is too complex so stick with PMOS + NMOS
+
+--> Very Low speed JumpStart feature 
+         - Motor need initial momentum to run at very low speeds (above 200 - 220 duty cycle modes)
+         - For lower speed then 200 duty cycle adding jumpStart feature would be great (Give more power initially then go back to original dutycycle) 
+
+--> Camera module :-
+
+         - Example code gived me around 6-11 fps video
+         - Other codes do not even work
+        NOTE :- Example code might be complex but it's the only woking code
+
+--> Main Controller :-
+         - Removable Main Controller unit
+
+--> Headlight and Stop light features :- 
+         - Intensity control of headlights
+         - breaking lights turn on during breaking and stay half powered normally
+        NOTE :- You can use In build falsh but it will consume power from controller's battery
+
+--> Rotatable Camera module :-
+         - Adjustable camera view for all directions of car
+         - you need two servo or small motors with gears for this task
+
+

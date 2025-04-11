@@ -1,0 +1,5 @@
+
+--> 5 volt regulator 
+5 volt regulator can't meet the current requirement
+LM317 - 
+NOTE :- Use LM317 but but do something about power waste in IC operation

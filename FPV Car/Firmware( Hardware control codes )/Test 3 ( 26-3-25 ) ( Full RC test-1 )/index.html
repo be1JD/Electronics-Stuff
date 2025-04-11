@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote for FPV car control</title>
+    <script src="https://cdn.jsdelivr.net/npm/nipplejs@0.9.0"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #status {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .video-container {
+            margin-top: 20px;
+        }
+
+        .slider-container {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 15px;
+            margin: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>FPV Car Joystick Controller</h1>
+    <p id="status">Status: Not Connected</p>
+    <p id="current_command">No Command yet</p>
+
+    <!-- FPV Camera Feed -->
+    <div class="video-container">
+        <img id="video" src="http://192.168.1.100:81/stream" width="100%">
+    </div>
+
+    <!-- Speed Control Slider -->
+    <div class="slider-container">
+        <label for="speed">Speed Control: <span id="speedValue">128</span></label><br>
+        <input type="range" id="speed" min="0" max="255" value="128">
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="container">
+        <div class="controls">
+            <button ontouchstart="sendCommand('forward_start')" ontouchend="sendCommand('forward_stop')">⬆️</button>
+            <button ontouchstart="sendCommand('left_start')" ontouchend="sendCommand('left_stop')">⬅️</button>
+            <button ontouchstart="sendCommand('right_start')" ontouchend="sendCommand('right_stop')">➡️</button>
+            <button ontouchstart="sendCommand('back_start')" ontouchend="sendCommand('back_stop')">⬇️</button>
+        </div>
+    </div>
+
+    <script>
+        let ws;
+        let esp32_ip = "ws://192.168.75.146:81"; // Replace with ESP32 IP
+
+        function connectWebSocket() {
+            ws = new WebSocket(esp32_ip);
+            ws.onopen = () => { document.getElementById("status").innerText = "Status: Connected!"; };
+            ws.onmessage = (event) => { console.log("Message from ESP32:", event.data); };
+            ws.onclose = () => {
+                document.getElementById("status").innerText = "Status: Disconnected!";
+                setTimeout(connectWebSocket, 2000);
+            };
+        }
+
+        function sendCommand(command) {
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(command);
+                console.log("Sent:", command);
+            }
+            document.getElementById("current_command").innerText = command;
+        }
+
+        // Speed Control
+        let speedSlider = document.getElementById("speed");
+        let speedValueDisplay = document.getElementById("speedValue");
+
+        speedSlider.addEventListener("input", () => {
+            let speed = speedSlider.value;
+            speedValueDisplay.innerText = speed;
+            sendCommand("speed:" + speed);
+        });
+
+        connectWebSocket();
+    </script>
+
+</body>
+
+</html>

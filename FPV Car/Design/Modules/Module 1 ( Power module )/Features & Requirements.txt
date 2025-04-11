@@ -1,0 +1,16 @@
+
+Problem :- Microcontroller get reset if hardware use too much power so use separate battery or supply ciruit for microcontrollers 
+Solution :- Use to separate Power sources for microcontroller And Motor hardware
+
+1. Brain Switch ( Microcontroller swicth ) :
+      - Power Switch for Microcontroller and Camera Module 
+      - Devices :- Camera Module, Main Microcontroller( ESP32 )
+      - Power Consumption :- 200-1000 miliamps of current 
+     
+2. Power Swicth ( Motor switch ) :
+      - High Power Source for Powering Motors & other Power demanding Circuits
+      - Devices :- Rear Motor H-Bridge Driver, Control signal current gain driver, Servo motor, Headlights, Back lights
+      - Power Consumption :- 20 ma to 2.5 amps of current
+
+
+

@@ -1,0 +1,14 @@
+--> Using two separate batteries 
+
+1. Brain Battery ( Microcontroller Battery ) :- 
+     - The microcontroller needs 200 - 600 mah at 5 volts
+     - Need voltage booster to boost voltage for stable 5 volts
+
+2. Main Battery ( Motor Powering Battery ) :- 
+     - The current consumption depends on Motor speed selections 
+     - Servo motor needs 5 volt for operation ( maybe use boost converter for that )
+     - Rear motor max voltage rating is 6 volts 
+     - Total current consumption :- 1.5 (rear motor) + 0.2(motor driver) + 0.1 to 1 (servo motor) = 2.7 amps
+     - Standby power consumption :- 2-10 miliamps --> Servo motor mostly
+     NOTE :_ You can use 12 volt battery if your motors & servo are rated for that
+

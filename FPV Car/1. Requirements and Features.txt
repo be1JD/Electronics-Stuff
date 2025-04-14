@@ -43,4 +43,7 @@
          - Adjustable camera view for all directions of car
          - you need two servo or small motors with gears for this task
 
+--> You can send messages from Car to User also 
+         - This is quite good to know parameter of the Car like battery charge, Servo real time position, Other sensor data
+
 

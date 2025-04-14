@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 WebSocket LED</title>
+  <script>
+    var socket;
+    window.onload = function() {
+      socket = new WebSocket("ws://" + location.host + "/ws");
+      socket.onmessage = function(event) {
+        document.getElementById("status").innerText = event.data;
+      };
+    };
+
+    function toggleLED(state) {
+      socket.send(state);
+    }
+  </script>
+</head>
+<body>
+  <h2>ESP32 LED Toggle (WebSocket)</h2>
+  <button onclick="toggleLED('ON')">Turn ON</button>
+  <button onclick="toggleLED('OFF')">Turn OFF</button>
+  <p>Status: <span id="status">N/A</span></p>
+</body>
+</html>
